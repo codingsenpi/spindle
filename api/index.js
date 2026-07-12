@@ -7,6 +7,12 @@ const { getMessaging } = require('firebase-admin/messaging');
 const { getFirestore } = require('firebase-admin/firestore');
 
 const app = express();
+
+app.use((req, res, next) => {
+  req.url = new URL(req.url, 'http://localhost').pathname;
+  next();
+});
+
 app.use(express.json());
 app.use(cors());
 
